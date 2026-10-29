@@ -1,0 +1,5 @@
+include README.md AGENTS.md requirements.lock .gitignore
+recursive-include docs *.md
+recursive-include examples *.py *.jsonl *.txt
+recursive-include tests *.py
+recursive-include .github/workflows *.yml

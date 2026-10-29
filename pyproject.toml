@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evaluation-integrity-toolkit"
+version = "0.1.0"
+description = "Freeze evaluation intent and gate Inspect AI exports on run integrity"
+requires-python = ">=3.11"
+dependencies = ["inspect-ai==0.3.285", "pydantic==2.14.1"]
+
+[project.optional-dependencies]
+dev = ["pytest==9.2.0", "hypothesis==6.170.12", "ruff==0.17.3", "build==1.6.1"]
+
+[project.scripts]
+eit = "eval_integrity.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: runs real Inspect AI with a mock provider", "e2e: exercises installed CLI subprocesses"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

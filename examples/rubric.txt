@@ -1,0 +1,3 @@
+text_match_v1 uses Inspect's match scorer with default options.
+Mock mode returns a fixed answer for offline infrastructure testing.
+Integrity checks do not enforce a minimum benchmark score.

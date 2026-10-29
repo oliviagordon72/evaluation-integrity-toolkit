@@ -1,0 +1,35 @@
+name: integrity
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-evaluation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - name: Install package and tests
+        run: python -m pip install -c requirements.lock '.[dev]'
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Unit, property, integration, and CLI tests
+        run: |
+          mkdir -p .integrity
+          pytest -q --junitxml=.integrity/test-results.xml
+      - name: Build installable distribution
+        run: python -m build
+      - name: Offline release and rejection demo
+        run: python examples/demo.py

@@ -1,0 +1,3 @@
+{"id":"greeting","input":"Reply with exactly: mock answer","target":"mock answer"}
+{"id":"echo","input":"Echo these two words: mock answer","target":"mock answer"}
+{"id":"format","input":"Return mock answer with no punctuation","target":"mock answer"}
